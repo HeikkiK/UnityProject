@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
 		float moveVertical = Input.GetAxis ("Vertical");
 
-        float test = Input.GetAxis("Vertical");
+        //float test = Input.GetAxis("Vertical");
 
     }
 }

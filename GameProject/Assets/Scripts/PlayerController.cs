@@ -66,4 +66,4 @@ public class PlayerController : MonoBehaviour
 		SceneManager.LoadScene ("Main");
 	}
 }
-//toinen kommentti
+//toinen kommentt

@@ -67,4 +67,3 @@ public class PlayerController : MonoBehaviour
 	}
 }
 //toinen kommentti
-//Uuusi kokeilu

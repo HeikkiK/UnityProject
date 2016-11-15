@@ -314,7 +314,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.3
+  m_GravityScale: 0.2
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -332,6 +332,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActualSpeed: 0
+  RotationSpeed: 5
+  GravityScale: 0
   CurrentSpeed: 0
 --- !u!212 &80989655
 SpriteRenderer:
@@ -3448,7 +3450,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013267930710, guid: 7d4aa92c04872eb42ac31c0d26d510c3, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.89
+      value: 1.9
       objectReference: {fileID: 0}
     - target: {fileID: 4000013267930710, guid: 7d4aa92c04872eb42ac31c0d26d510c3, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3477,6 +3479,11 @@ Prefab:
     - target: {fileID: 4000013267930710, guid: 7d4aa92c04872eb42ac31c0d26d510c3, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 50000012163626478, guid: 7d4aa92c04872eb42ac31c0d26d510c3,
+        type: 2}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7d4aa92c04872eb42ac31c0d26d510c3, type: 2}

@@ -10,6 +10,6 @@ public class SortingLayer : MonoBehaviour {
 	{
 		GetComponent<MeshRenderer> ().sortingLayerName = SortingLayerName;
 		GetComponent<MeshRenderer> ().sortingOrder = SortingOrder;
-		GetComponent<TextMesh> ().text = "Hei På Dej";
+		GetComponent<TextMesh> ().text = "Scores";
 	}
 }

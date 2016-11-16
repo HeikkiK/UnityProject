@@ -3,27 +3,41 @@ using System.Collections;
 
 public class EnemyAi : MonoBehaviour {
 
+	private GameObject player;
+
 	private float currentSpeed = 3;
+	public float RotationSpeed = 5;
 	private Rigidbody2D rb2d;
-	private GameObject enemy_1;
+
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		rb2d = GetComponent<Rigidbody2D> ();
-		enemy_1 = gameObject;
+		player = GameObject.Find("Player");
 	}
 
-	void OnBecameInvisible() {
+	void OnBecameInvisible() 
+	{
 		DestroyObject (gameObject);
 	}
 	// Update is called once per frame
-	void Update () {
-		transform.position += transform.up * currentSpeed * Time.deltaTime;
+	void Update () 
+	{
+//		transform.position += transform.up * currentSpeed * Time.deltaTime;
+	}
 
-		if (enemy_1 == null) 
-		{
-			enemy_1 = GameObject.Find("Enemy_1");
-//			enemy_1.transform.position = new Vector3(5.6f, 1.9f, 0);
-		}
+	void LateUpdate()
+	{
+		FollowPlayer ();
 
+	}
+
+	public void FollowPlayer()
+	{
+		transform.LookAt(player.transform.position);
+		transform.Rotate(new Vector3 (0, 90, 90));
+
+		Vector3 targetPoint = player.transform.position;
+		transform.position = Vector3.MoveTowards(transform.position, targetPoint, 3 * Time.deltaTime);
 	}
 }

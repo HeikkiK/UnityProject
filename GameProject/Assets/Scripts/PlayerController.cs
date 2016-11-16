@@ -61,9 +61,12 @@ public class PlayerController : MonoBehaviour
 		lastPosition = transform.position;
 
 		//This needs to be changed 
-		if (CurrentSpeed < 3 && rb2d.gravityScale <= 0.3f) {
+		if (CurrentSpeed < 3 && rb2d.gravityScale <= 0.3f) 
+		{
 			rb2d.gravityScale += 0.1f * Time.deltaTime;
-		} else if (CurrentSpeed > 0 && rb2d.gravityScale >= 0){
+		} 
+		else if (CurrentSpeed > 0 && rb2d.gravityScale >= 0)
+		{
 			rb2d.gravityScale -= 0.1f * Time.deltaTime;
 		}
 
@@ -72,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D other)
 	{
-		if (ActualSpeed > 7.0) 
+		if (ActualSpeed > 6.0) 
 		{
 			Die();
 		}

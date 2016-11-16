@@ -3,10 +3,11 @@ using System.Collections;
 
 public class EnemyAi : MonoBehaviour {
 
-	private GameObject player;
-
-	private float currentSpeed = 3;
 	public float RotationSpeed = 5;
+	public bool IsEnemyDisabled = false;
+
+	private GameObject player;
+	private float currentSpeed = 3;
 	private Rigidbody2D rb2d;
 
 	// Use this for initialization
@@ -28,8 +29,10 @@ public class EnemyAi : MonoBehaviour {
 
 	void LateUpdate()
 	{
-		FollowPlayer ();
-
+		if (!IsEnemyDisabled) 
+		{
+			FollowPlayer ();
+		}
 	}
 
 	public void FollowPlayer()

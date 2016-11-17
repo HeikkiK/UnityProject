@@ -14,10 +14,19 @@ public class PlayerController : MonoBehaviour
 	private Vector3 lastPosition;
 	private GameObject enemy_1;
 
+	//miten päin se alus on?
+	bool facingRight;
+
+	public GameObject leftBullet, rightBullet;
+	Transform firePos;
+
 	void Start()
 	{
 		rb2d = GetComponent<Rigidbody2D> ();
 		enemy_1 = GameObject.Find("Enemy_1");
+
+		firePos = transform.FindChild ("firePos");
+
 	}
 
 	void Update()
@@ -26,6 +35,11 @@ public class PlayerController : MonoBehaviour
 		{
 			enemy_1 = Instantiate(Resources.Load("Prefabs/Enemy_1", typeof(GameObject)) as GameObject);
 			//			enemy_1.transform.position = new Vector3(5.6f, 1.9f, 0);
+		}
+
+		if (Input.GetKeyDown (KeyCode.Space)) 
+		{
+			Fire ();
 		}
 	}
 
@@ -85,5 +99,15 @@ public class PlayerController : MonoBehaviour
 	{
 		SceneManager.LoadScene ("Main");
 		//muutos
+	}
+
+	void Fire()
+	{
+		//Ongelma on se, että jos alus menee oikealle ja ampuu, niin alus liikkuu vasemmalle
+		if(facingRight)
+			Instantiate (rightBullet, firePos.position, Quaternion.identity);
+		if(!facingRight)
+			Instantiate (leftBullet, firePos.position, Quaternion.identity);
+			
 	}
 }

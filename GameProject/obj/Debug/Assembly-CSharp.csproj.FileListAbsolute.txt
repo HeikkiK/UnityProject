@@ -21,3 +21,26 @@ I:\Projektit\UnityProject\GameProject\Temp\bin\Debug\UnityEngine.Networking.xml
 I:\Projektit\UnityProject\GameProject\Temp\bin\Debug\UnityEngine.Analytics.xml
 I:\Projektit\UnityProject\GameProject\obj\Debug\Assembly-CSharp.dll
 I:\Projektit\UnityProject\GameProject\obj\Debug\Assembly-CSharp.pdb
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\Assembly-CSharp.dll
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\Assembly-CSharp.pdb
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\UnityEditor.dll
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\UnityEngine.Analytics.dll
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\UnityEngine.dll
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\UnityEngine.Networking.dll
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\UnityEngine.UI.dll
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\Mono.Cecil.dll
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\Unity.SerializationLogic.dll
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\Unity.DataContract.dll
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\Unity.UNetWeaver.dll
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\Unity.CecilTools.dll
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\UnityEngine.xml
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\UnityEditor.xml
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\UnityEngine.UI.xml
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\UnityEngine.Networking.xml
+I:\Projektit\Unity projects\UnityProject\GameProject\Temp\bin\Debug\UnityEngine.Analytics.xml
+I:\Projektit\Unity projects\UnityProject\GameProject\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+I:\Projektit\Unity projects\UnityProject\GameProject\obj\Debug\Assembly-CSharp.dll
+I:\Projektit\Unity projects\UnityProject\GameProject\obj\Debug\Assembly-CSharp.pdb

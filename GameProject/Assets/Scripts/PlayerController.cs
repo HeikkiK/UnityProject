@@ -13,15 +13,17 @@ public class PlayerController : MonoBehaviour
 	private int maxSpeed = 6;
 	private Vector3 lastPosition;
 	private GameObject enemy_1;
-
-	//miten päin se alus on?
-	bool facingRight;
+	public float MovedDistance = 0;
 
 	public GameObject leftBullet, rightBullet;
 	Transform firePos;
 
+	//miten päin se alus on?
+	bool facingRight;
+
 	void Start()
 	{
+		lastPosition = transform.position;
 		rb2d = GetComponent<Rigidbody2D> ();
 		enemy_1 = GameObject.Find("Enemy_1");
 
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour
 
 	void FixedUpdate() 
 	{
+		MovedDistance += Vector3.Distance (transform.position, lastPosition);
 		PlayerMovement ();
 	}
 

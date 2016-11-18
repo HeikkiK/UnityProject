@@ -41,6 +41,6 @@ public class EnemyAi : MonoBehaviour {
 		transform.Rotate(new Vector3 (0, 90, 90));
 
 		Vector3 targetPoint = player.transform.position;
-		transform.position = Vector3.MoveTowards(transform.position, targetPoint, 3 * Time.deltaTime);
+		transform.position = Vector3.MoveTowards(transform.position, targetPoint, currentSpeed * Time.deltaTime);
 	}
 }

@@ -6,15 +6,19 @@ public class PlayerController : MonoBehaviour
 {
 	public float ActualSpeed = 0;
 	public float RotationSpeed = 5;
-	public float GravityScale = 0;
 	public float CurrentSpeed = 0;
+	public float MovedDistance = 0;
+	public float FullTankSize = 1000;
+	public float RemainingFuel = 0;
+	public float FuelConsumtion = 0;
+	public float RemainInProcent = 0;
+
 	private Rigidbody2D rb2d;
 	private float acceleration = 0.1f;
 	private int maxSpeed = 6;
 	private Vector3 lastPosition;
 	private GameObject enemy_1;
-	public float MovedDistance = 0;
-
+	private bool isOutOfFuel = false;
 	public GameObject leftBullet, rightBullet;
 	Transform firePos;
 
@@ -23,12 +27,13 @@ public class PlayerController : MonoBehaviour
 
 	void Start()
 	{
+		FuelConsumtion = 15f;
 		lastPosition = transform.position;
 		rb2d = GetComponent<Rigidbody2D> ();
 		enemy_1 = GameObject.Find("Enemy_1");
 
 		firePos = transform.FindChild ("firePos");
-
+		RemainingFuel = FullTankSize;
 	}
 
 	void Update()
@@ -47,19 +52,36 @@ public class PlayerController : MonoBehaviour
 
 	void FixedUpdate() 
 	{
-		MovedDistance += Vector3.Distance (transform.position, lastPosition);
+		isOutOfFuel = CalculateFuelConsumption ();
 		PlayerMovement ();
+	}
+
+	private bool CalculateFuelConsumption()
+	{
+		MovedDistance += Vector3.Distance (transform.position, lastPosition);
+		if (RemainingFuel > 0) {
+			RemainingFuel -= FuelConsumtion * Vector3.Distance (transform.position, lastPosition);
+			RemainInProcent = Mathf.Max((100 / FullTankSize) * RemainingFuel, 0);
+		} else {
+			return true;
+		}
+		return false;
 	}
 
 	private void PlayerMovement()
 	{
-		if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) 
-		{
-			if (CurrentSpeed < maxSpeed) {
-				CurrentSpeed += acceleration;
+		if (isOutOfFuel) {
+			CurrentSpeed = 0;
+		} else {
+			if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) 
+			{
+				if (CurrentSpeed < maxSpeed) {
+					CurrentSpeed += acceleration;
+				}
 			}
 		}
-		else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
+
+		if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
 			if (CurrentSpeed > 0) {
 				CurrentSpeed -= acceleration;
 			}
@@ -86,8 +108,6 @@ public class PlayerController : MonoBehaviour
 		{
 			rb2d.gravityScale -= 0.1f * Time.deltaTime;
 		}
-
-		GravityScale = rb2d.gravityScale; // only to see gravityscale in UI
 	}
 
 	void OnCollisionEnter2D(Collision2D other)

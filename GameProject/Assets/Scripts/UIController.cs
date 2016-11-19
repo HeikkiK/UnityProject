@@ -22,7 +22,7 @@ public class UIController : MonoBehaviour {
 		{
 		case "PlayerFuel":
 			{
-				TextObject.text = ((int)Player.MovedDistance).ToString();
+				TextObject.text = ((int)Player.RemainInProcent).ToString() + "%";
 				break;
 			}
 		case "PlayerScores":

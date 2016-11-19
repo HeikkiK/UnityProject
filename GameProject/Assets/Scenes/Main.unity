@@ -361,12 +361,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActualSpeed: 0
   RotationSpeed: 5
-  GravityScale: 0
   CurrentSpeed: 0
   MovedDistance: 0
-  leftBullet: {fileID: 1000013088046520, guid: 55f66062051c7134f9df27519608ac10, type: 2}
-  rightBullet: {fileID: 1000013088046520, guid: 05704a4badff1854a9cfe0c9b45175bb,
-    type: 2}
+  FullTankSize: 1000
+  RemainingFuel: 0
+  FuelConsumtion: 0
+  RemainInProcent: 0
+  leftBullet: {fileID: 0}
+  rightBullet: {fileID: 0}
 --- !u!212 &80989655
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3609,6 +3611,11 @@ Prefab:
     - target: {fileID: 50000012163626478, guid: 7d4aa92c04872eb42ac31c0d26d510c3,
         type: 2}
       propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010201923236, guid: 7d4aa92c04872eb42ac31c0d26d510c3,
+        type: 2}
+      propertyPath: IsEnemyDisabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

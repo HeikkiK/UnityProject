@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
 	{
 		if (isOutOfFuel) {
 			CurrentSpeed = 0;
+			GameObject.Find("Smoke").GetComponent<ParticleSystem>().Stop ();
 		} else {
 			if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) 
 			{
@@ -84,6 +85,8 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
 			if (CurrentSpeed > 0) {
 				CurrentSpeed -= acceleration;
+			} else {
+				CurrentSpeed = 0;
 			}
 		}
 		else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) {

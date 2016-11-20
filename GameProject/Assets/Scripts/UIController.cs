@@ -18,6 +18,14 @@ public class UIController : MonoBehaviour {
 
 	void Update()
 	{
+		SetUIComponentPositions ();
+
+		UpdateUIComponentValue ();
+
+	}
+
+	void UpdateUIComponentValue()
+	{
 		switch (name) 
 		{
 		case "PlayerFuel":
@@ -30,8 +38,29 @@ public class UIController : MonoBehaviour {
 				TextObject.text = "Scores";
 				break;
 			}
-			default:
+		default:
+			break;
+		}
+	}
+
+	void SetUIComponentPositions()
+	{
+		switch (name) 
+		{
+		case "PlayerFuel":
+			{
+				var xValue = Camera.main.ViewportToWorldPoint(new Vector3(1,1,0)).x;
+				transform.position = new Vector3 (xValue, -4, 0);
 				break;
+			}
+		case "PlayerScores":
+			{
+				var xValue = Camera.main.ViewportToWorldPoint(new Vector3(1,0,0)).x;
+				transform.position = new Vector3 (xValue, 5, 0);
+				break;
+			}
+		default:
+			break;
 		}
 	}
 }

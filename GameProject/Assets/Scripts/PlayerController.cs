@@ -4,12 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-	public float ActualSpeed = 0;
+	public static float ActualSpeed = 0;
 	public float RotationSpeed = 5;
 	public float CurrentSpeed = 0;
 	public float MovedDistance = 0;
-	public float FullTankSize = 1000;
-	public float RemainingFuel = 0;
+	public static float FullTankSize = 1000;
+	public static float RemainingFuel = 0;
 	public float FuelConsumtion = 0;
 	public float RemainInProcent = 0;
 

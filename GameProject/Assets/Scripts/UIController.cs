@@ -6,7 +6,7 @@ public class UIController : MonoBehaviour {
 	private string sortingLayerName = "UI";
 	private int sortingOrder = 0;
 	private PlayerController Player;
-	private TextMesh TextObject;
+	public TextMesh TextObject;
 
 	void Start ()
 	{

@@ -19,7 +19,7 @@ public class EnemyAi : MonoBehaviour {
 
 	void OnBecameInvisible() 
 	{
-//		DestroyObject (gameObject);
+		DestroyObject (gameObject);
 	}
 	// Update is called once per frame
 	void Update () 

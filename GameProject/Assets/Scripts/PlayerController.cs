@@ -115,7 +115,8 @@ public class PlayerController : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D other)
 	{
-		if (ActualSpeed > 6.0) 
+		
+		if (ActualSpeed > 6.0 || other.gameObject.name == "Ground_collider") 
 		{
 			Die();
 		}

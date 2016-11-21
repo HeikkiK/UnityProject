@@ -5,23 +5,26 @@ public class UIController : MonoBehaviour {
 
 	private string sortingLayerName = "UI";
 	private int sortingOrder = 0;
-	private PlayerController Player;
+	private PlayerController player;
 	private TextMesh TextObject;
 
 	void Start ()
 	{
-		Player = FindObjectOfType(typeof(PlayerController)) as PlayerController;
 		GetComponent<MeshRenderer> ().sortingLayerName = sortingLayerName;
 		GetComponent<MeshRenderer> ().sortingOrder = sortingOrder;
 		TextObject = GetComponent<TextMesh> ();
 	}
 
-	void Update()
+	void LateUpdate()
 	{
-		SetUIComponentPositions ();
+		if (player == null) {
+			player = FindObjectOfType (typeof(PlayerController)) as PlayerController;
+		}
+		else {
+			SetUIComponentPositions ();
 
-		UpdateUIComponentValue ();
-
+			UpdateUIComponentValue ();
+		}
 	}
 
 	void UpdateUIComponentValue()
@@ -30,7 +33,7 @@ public class UIController : MonoBehaviour {
 		{
 		case "PlayerFuel":
 			{
-				TextObject.text = ((int)Player.RemainInProcent).ToString() + "%";
+				TextObject.text = ((int)player.RemainInProcent).ToString() + "%";
 				break;
 			}
 		case "PlayerScores":

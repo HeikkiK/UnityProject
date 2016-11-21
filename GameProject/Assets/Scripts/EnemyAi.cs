@@ -14,7 +14,6 @@ public class EnemyAi : MonoBehaviour {
 	void Start () 
 	{
 		rb2d = GetComponent<Rigidbody2D> ();
-		player = GameObject.Find("Player");
 	}
 
 	void OnBecameInvisible() 
@@ -29,9 +28,13 @@ public class EnemyAi : MonoBehaviour {
 
 	void LateUpdate()
 	{
-		if (!IsEnemyDisabled) 
-		{
-			FollowPlayer ();
+		if (player == null) {
+			player = GameObject.Find("Player(Clone)");
+		} else {
+			if (!IsEnemyDisabled) 
+			{
+				FollowPlayer ();
+			}
 		}
 	}
 

@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 	private GameObject enemy_1;
 	private bool isOutOfFuel = false;
 	public GameObject leftBullet, rightBullet;
+	public GameObject Explosion;
 	Transform firePos;
 
 	//miten päin se alus on?
@@ -30,20 +31,12 @@ public class PlayerController : MonoBehaviour
 		FuelConsumtion = 15f;
 		lastPosition = transform.position;
 		rb2d = GetComponent<Rigidbody2D> ();
-		enemy_1 = GameObject.Find("Enemy_1");
-
 		firePos = transform.FindChild ("firePos");
 		RemainingFuel = FullTankSize;
 	}
 
 	void Update()
 	{
-		if (enemy_1 == null) 
-		{
-			enemy_1 = Instantiate(Resources.Load("Prefabs/Enemy_1", typeof(GameObject)) as GameObject);
-			//			enemy_1.transform.position = new Vector3(5.6f, 1.9f, 0);
-		}
-
 		if (Input.GetKeyDown (KeyCode.Space)) 
 		{
 			Fire ();
@@ -124,8 +117,14 @@ public class PlayerController : MonoBehaviour
 
 	void Die()
 	{
-		SceneManager.LoadScene ("Main");
-		//muutos
+		Explosion = Resources.Load ("Prefabs/Explosion_2", typeof(GameObject)) as GameObject;
+		Instantiate(Explosion, transform.position, transform.rotation);
+
+		Destroy(Explosion, 5);
+		if (gameObject != null) {
+			Destroy (gameObject);
+		}
+//		SceneManager.LoadScene ("Main");
 	}
 
 	void Fire()

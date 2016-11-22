@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 	public float RotationSpeed = 5;
 	public float CurrentSpeed = 0;
 	public float MovedDistance = 0;
-	public static float FullTankSize = 1000;
+	public static float FullTankSize = 1500;
 	public static float RemainingFuel = 0;
 	public float FuelConsumtion = 0;
 	public float RemainInProcent = 0;
@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 	public GameObject leftBullet, rightBullet;
 	public float fireRate = 0;
 	float timeToFire = 0;
-	public GameObject Explosion;
+	private GameObject explosion;
 	
 	//Tällä oon yrittänyt aluksen keulan suuntaa kattoa ja sitä kautta ampumissuuntaa.
 	Transform firePoint;
@@ -37,26 +37,19 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-
-		{
-
 		if (fireRate == 0) 
-
 		{
-		
 			if (Input.GetKeyDown (KeyCode.Space)) 
 			{
 				Fire ();
 			}
-
 		}
-					//Tällä oon yrittänyt sitä sarjatulta
+		//Tällä oon yrittänyt sitä sarjatulta
 		else if (Input.GetKeyDown (KeyCode.Space) && Time.time > timeToFire)
-			{
+		{
 			timeToFire = Time.time + 1/fireRate;
 			Fire();
-		  	}																		
-		}
+	  	}																		
 	}
 
 	void FixedUpdate() 
@@ -82,7 +75,10 @@ public class PlayerController : MonoBehaviour
 		if (isOutOfFuel) {
 			CurrentSpeed = 0;
 			GameObject.Find("Smoke").GetComponent<ParticleSystem>().Stop ();
-		} else {
+		} 
+		else 
+		{
+			GameObject.Find ("Smoke").GetComponent<ParticleSystem> ().Play ();
 			if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) 
 			{
 				if (CurrentSpeed < maxSpeed) {
@@ -124,7 +120,6 @@ public class PlayerController : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D other)
 	{
-		
 		if (ActualSpeed > 6.0 || other.gameObject.name == "Ground_collider") 
 		{
 			Die();
@@ -133,10 +128,9 @@ public class PlayerController : MonoBehaviour
 
 	void Die()
 	{
-		Explosion = Resources.Load ("Prefabs/Explosion_2", typeof(GameObject)) as GameObject;
-		Instantiate(Explosion, transform.position, transform.rotation);
+		explosion = Resources.Load ("Prefabs/Explosion_2", typeof(GameObject)) as GameObject;
+		Instantiate(explosion, transform.position, transform.rotation);
 
-		Destroy(Explosion, 5);
 		if (gameObject != null) {
 			Destroy (gameObject);
 		}

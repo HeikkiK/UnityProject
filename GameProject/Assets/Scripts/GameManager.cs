@@ -2,9 +2,12 @@
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
+	public bool DisableEnemies = false;
+	public static GameManager instance = null;
+
 	private GameObject enemy_1;
 	private GameObject player;
-	public static GameManager instance = null;
+
 	// Use this for initialization
 	void Awake () 
 	{
@@ -20,8 +23,12 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () 
-	{		
-		if (enemy_1 == null) 
+	{
+		if (DisableEnemies) {
+			Destroy (enemy_1);
+		}
+
+		if (enemy_1 == null && !DisableEnemies) 
 		{
 			enemy_1 = Instantiate(Resources.Load("Prefabs/Enemy_1", typeof(GameObject)) as GameObject);
 		}

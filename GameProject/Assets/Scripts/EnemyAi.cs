@@ -4,7 +4,6 @@ using System.Collections;
 public class EnemyAi : MonoBehaviour {
 
 	public float RotationSpeed = 5;
-	public bool IsEnemyDisabled = false;
 
 	private GameObject player;
 	private float currentSpeed = 3;
@@ -28,14 +27,10 @@ public class EnemyAi : MonoBehaviour {
 
 	void LateUpdate()
 	{
-		if (player == null) {
+		if (player == null) 
+		{
 			player = GameObject.Find("Player(Clone)");
-		} else {
-			if (!IsEnemyDisabled) 
-			{
-				FollowPlayer ();
-			}
-		}
+		} 
 	}
 
 	public void FollowPlayer()

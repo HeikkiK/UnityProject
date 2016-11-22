@@ -20,26 +20,42 @@ public class PlayerController : MonoBehaviour
 	private GameObject enemy_1;
 	private bool isOutOfFuel = false;
 	public GameObject leftBullet, rightBullet;
+	public float fireRate = 0;
+	float timeToFire = 0;
 	public GameObject Explosion;
-	Transform firePos;
-
-	//miten päin se alus on?
-	bool facingRight;
+	
+	//Tällä oon yrittänyt aluksen keulan suuntaa kattoa ja sitä kautta ampumissuuntaa.
+	Transform firePoint;
 
 	void Start()
 	{
 		FuelConsumtion = 15f;
 		lastPosition = transform.position;
 		rb2d = GetComponent<Rigidbody2D> ();
-		firePos = transform.FindChild ("firePos");
 		RemainingFuel = FullTankSize;
 	}
 
 	void Update()
 	{
-		if (Input.GetKeyDown (KeyCode.Space)) 
+
 		{
-			Fire ();
+
+		if (fireRate == 0) 
+
+		{
+		
+			if (Input.GetKeyDown (KeyCode.Space)) 
+			{
+				Fire ();
+			}
+
+		}
+					//Tällä oon yrittänyt sitä sarjatulta
+		else if (Input.GetKeyDown (KeyCode.Space) && Time.time > timeToFire)
+			{
+			timeToFire = Time.time + 1/fireRate;
+			Fire();
+		  	}																		
 		}
 	}
 
@@ -129,11 +145,29 @@ public class PlayerController : MonoBehaviour
 
 	void Fire()
 	{
-		//Ongelma on se, että jos alus menee oikealle ja ampuu, niin alus liikkuu vasemmalle
-		if(facingRight)
-			Instantiate (rightBullet, firePos.position, Quaternion.identity);
-		if(!facingRight)
-			Instantiate (leftBullet, firePos.position, Quaternion.identity);
+		if (firePoint)
+		//rb2d.gravityScale += 0.1f * Time.deltaTime;
+		//Eikö tähän pitäisi laittaa jos transform rotation on positiivinen, niin ampuu oikelle?
+		Instantiate (rightBullet, transform.position, Quaternion.identity);	
+		//Ja tänne jos transform rotation on negatiivinen, niin vasemmalle?
+		if (!firePoint)
+		//rb2d.gravityScale -= 0.1f * Time.deltaTime;
+		Instantiate (leftBullet, transform.position, Quaternion.identity);
+
+
+		/*if ()
+		{
+			//transform.Rotate (Vector3.forward);
+			Instantiate (rightBullet, transform.position, Quaternion.identity);
+		} 
 			
+		
+		if (CurrentSpeed <= 0) 
+		{
+			//transform.Rotate (-Vector3.forward);
+			Instantiate (leftBullet, transform.position, Quaternion.identity);
+		}*/
+
+					
 	}
 }

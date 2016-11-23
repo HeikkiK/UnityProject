@@ -31,6 +31,8 @@ public class EnemyAi : MonoBehaviour {
 		{
 			player = GameObject.Find("Player(Clone)");
 		} 
+
+		FollowPlayer ();
 	}
 
 	public void FollowPlayer()

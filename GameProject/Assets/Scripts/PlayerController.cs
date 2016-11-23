@@ -19,16 +19,15 @@ public class PlayerController : MonoBehaviour
 	private Vector3 lastPosition;
 	private GameObject enemy_1;
 	private bool isOutOfFuel = false;
-	public GameObject leftBullet, rightBullet;
+	public GameObject Bullet;
 	public float fireRate = 0;
-	float timeToFire = 0;
 	private GameObject explosion;
-	
-	//Tällä oon yrittänyt aluksen keulan suuntaa kattoa ja sitä kautta ampumissuuntaa.
-	Transform firePoint;
+	private GameObject bullet, megaBomb;
 
 	void Start()
 	{
+		megaBomb = Resources.Load ("Prefabs/MegaBomb", typeof(GameObject)) as GameObject;
+		Bullet = Resources.Load ("Prefabs/rightBullet", typeof(GameObject)) as GameObject;
 		FuelConsumtion = 15f;
 		lastPosition = transform.position;
 		rb2d = GetComponent<Rigidbody2D> ();
@@ -37,19 +36,7 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-		if (fireRate == 0) 
-		{
-			if (Input.GetKeyDown (KeyCode.Space)) 
-			{
-				Fire ();
-			}
-		}
-		//Tällä oon yrittänyt sitä sarjatulta
-		else if (Input.GetKeyDown (KeyCode.Space) && Time.time > timeToFire)
-		{
-			timeToFire = Time.time + 1/fireRate;
-			Fire();
-	  	}																		
+		PlayerShooting ();
 	}
 
 	void FixedUpdate() 
@@ -58,9 +45,27 @@ public class PlayerController : MonoBehaviour
 		PlayerMovement ();
 	}
 
+	private void PlayerShooting()
+	{
+//		if (Input.GetKeyDown (KeyCode.Space))
+//		{
+//			bullet = Instantiate(Bullet, transform.position, transform.rotation) as GameObject;
+//		}
+//
+//		if (bullet != null) {
+//			bullet.transform.position += bullet.transform.up * 10 * Time.deltaTime;	
+//		}
+
+		if (Input.GetKeyDown (KeyCode.E)) 
+		{
+			var bomb = Instantiate(megaBomb, transform.position, transform.rotation) as GameObject;
+		}
+	}
+
 	private bool CalculateFuelConsumption()
 	{
 		MovedDistance += Vector3.Distance (transform.position, lastPosition);
+		lastPosition = transform.position;
 		if (RemainingFuel > 0) {
 			RemainingFuel -= FuelConsumtion * Vector3.Distance (transform.position, lastPosition);
 			RemainInProcent = Mathf.Max((100 / FullTankSize) * RemainingFuel, 0);
@@ -104,8 +109,7 @@ public class PlayerController : MonoBehaviour
 		transform.position += transform.up * CurrentSpeed * Time.deltaTime;
 
 		// Only calculates actual airplane speed
-		ActualSpeed = CommonFunctions.Round(((transform.position - lastPosition).magnitude / Time.deltaTime), 2);
-		lastPosition = transform.position;
+		ActualSpeed = rb2d.velocity.magnitude;
 
 		//This needs to be changed 
 		if (CurrentSpeed < 3 && rb2d.gravityScale <= 0.3f) 
@@ -135,33 +139,5 @@ public class PlayerController : MonoBehaviour
 			Destroy (gameObject);
 		}
 //		SceneManager.LoadScene ("Main");
-	}
-
-	void Fire()
-	{
-		if (firePoint)
-		//rb2d.gravityScale += 0.1f * Time.deltaTime;
-		//Eikö tähän pitäisi laittaa jos transform rotation on positiivinen, niin ampuu oikelle?
-		Instantiate (rightBullet, transform.position, Quaternion.identity);	
-		//Ja tänne jos transform rotation on negatiivinen, niin vasemmalle?
-		if (!firePoint)
-		//rb2d.gravityScale -= 0.1f * Time.deltaTime;
-		Instantiate (leftBullet, transform.position, Quaternion.identity);
-
-
-		/*if ()
-		{
-			//transform.Rotate (Vector3.forward);
-			Instantiate (rightBullet, transform.position, Quaternion.identity);
-		} 
-			
-		
-		if (CurrentSpeed <= 0) 
-		{
-			//transform.Rotate (-Vector3.forward);
-			Instantiate (leftBullet, transform.position, Quaternion.identity);
-		}*/
-
-					
 	}
 }

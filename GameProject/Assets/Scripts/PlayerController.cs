@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 	private Vector3 lastPosition;
 	private GameObject enemy_1;
 	private bool isOutOfFuel = false;
-	public GameObject Bullet;
+	private GameObject Bullet;
 	//public float fireRate = 0;
 	private GameObject explosion;
 	private GameObject bullet, megaBomb;
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
 	void Fire()
 	{
-		Instantiate (Bullet, transform.position, Quaternion.identity);				
+		Instantiate (Bullet, transform.position, transform.rotation);				
 	}
 
 

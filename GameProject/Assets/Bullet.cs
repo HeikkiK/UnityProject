@@ -5,6 +5,6 @@ public class Bullet : MonoBehaviour {
 
 	void Update () 
 	{
-		transform.position += transform.right * 10 * Time.deltaTime;
+		transform.position += transform.up * 10 * Time.deltaTime;
 	}
 }

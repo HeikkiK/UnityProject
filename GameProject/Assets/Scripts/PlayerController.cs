@@ -20,14 +20,14 @@ public class PlayerController : MonoBehaviour
 	private GameObject enemy_1;
 	private bool isOutOfFuel = false;
 	public GameObject Bullet;
-	public float fireRate = 0;
+	//public float fireRate = 0;
 	private GameObject explosion;
 	private GameObject bullet, megaBomb;
 
 	void Start()
 	{
 		megaBomb = Resources.Load ("Prefabs/MegaBomb", typeof(GameObject)) as GameObject;
-		Bullet = Resources.Load ("Prefabs/rightBullet", typeof(GameObject)) as GameObject;
+		Bullet = Resources.Load ("Prefabs/Bullet", typeof(GameObject)) as GameObject;
 		FuelConsumtion = 15f;
 		lastPosition = transform.position;
 		rb2d = GetComponent<Rigidbody2D> ();
@@ -35,9 +35,18 @@ public class PlayerController : MonoBehaviour
 	}
 
 	void Update()
+
 	{
-		PlayerShooting ();
+		if (Input.GetKeyDown (KeyCode.Space)) 
+		{
+			Fire ();
+		}
 	}
+
+	//{
+	//	PlayerShooting ();
+	//}
+
 
 	void FixedUpdate() 
 	{
@@ -45,16 +54,22 @@ public class PlayerController : MonoBehaviour
 		PlayerMovement ();
 	}
 
+	void Fire()
+	{
+		Instantiate (Bullet, transform.position, Quaternion.identity);				
+	}
+
+
 	private void PlayerShooting()
 	{
-//		if (Input.GetKeyDown (KeyCode.Space))
-//		{
-//			bullet = Instantiate(Bullet, transform.position, transform.rotation) as GameObject;
-//		}
-//
-//		if (bullet != null) {
-//			bullet.transform.position += bullet.transform.up * 10 * Time.deltaTime;	
-//		}
+		if (Input.GetKeyDown (KeyCode.Space))
+		{
+			bullet = Instantiate(Bullet, transform.position, transform.rotation) as GameObject;
+		}
+
+		if (bullet != null) {
+			bullet.transform.position += Bullet.transform.up * 10 * Time.deltaTime;	
+		}
 
 		if (Input.GetKeyDown (KeyCode.E)) 
 		{

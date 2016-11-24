@@ -25,5 +25,11 @@ public class GunController : MonoBehaviour
 
 			Destroy (gameObject);
 		}
+
+		if (other.gameObject.gameObject.CompareTag ("Enemy")) 
+		{
+			Destroy (other.gameObject);
+			Destroy (gameObject);
+		}
 	}
 }

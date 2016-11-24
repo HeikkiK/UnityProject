@@ -3,6 +3,7 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 	public bool DisableEnemies = false;
+	public bool InfiniteFuel = false;
 	public static GameManager instance = null;
 
 	private GameObject enemy_1;
@@ -24,10 +25,6 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (DisableEnemies) {
-			Destroy (enemy_1);
-		}
-
 		if (enemy_1 == null && !DisableEnemies) 
 		{
 			enemy_1 = Instantiate(Resources.Load("Prefabs/Enemy_1", typeof(GameObject)) as GameObject);
@@ -36,6 +33,15 @@ public class GameManager : MonoBehaviour {
 		if (player == null) 
 		{
 			player = Instantiate(Resources.Load("Prefabs/Player", typeof(GameObject)) as GameObject);
+		}
+
+		if (DisableEnemies) {
+			Destroy (enemy_1);
+		}
+		if (InfiniteFuel) {
+			player.GetComponent<PlayerController> ().FuelConsumtion = 0;
+		} else {
+			player.GetComponent<PlayerController> ().FuelConsumtion = 15;
 		}
 	}
 }

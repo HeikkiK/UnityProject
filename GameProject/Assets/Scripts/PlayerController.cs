@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
 	private Vector3 lastPosition;
 	private GameObject enemy_1;
 	private bool isOutOfFuel = false;
-	private GameObject Bullet;
 	//public float fireRate = 0;
 	private GameObject explosion;
 	private GameObject bullet, megaBomb;
@@ -27,7 +26,7 @@ public class PlayerController : MonoBehaviour
 	void Start()
 	{
 		megaBomb = Resources.Load ("Prefabs/MegaBomb", typeof(GameObject)) as GameObject;
-		Bullet = Resources.Load ("Prefabs/Bullet", typeof(GameObject)) as GameObject;
+		bullet = Resources.Load ("Prefabs/Bullet", typeof(GameObject)) as GameObject;
 		FuelConsumtion = 15f;
 		lastPosition = transform.position;
 		rb2d = GetComponent<Rigidbody2D> ();
@@ -35,52 +34,31 @@ public class PlayerController : MonoBehaviour
 	}
 
 	void Update()
-
 	{
-		if (Input.GetKeyDown (KeyCode.Space)) 
-		{
-			Fire ();
-		}
+		PlayerShooting ();
 	}
-
-	//{
-	//	PlayerShooting ();
-	//}
-
-
+		
 	void FixedUpdate() 
 	{
 		isOutOfFuel = CalculateFuelConsumption ();
 		PlayerMovement ();
-	}
-
-	void Fire()
-	{
-		Instantiate (Bullet, transform.position, transform.rotation);				
-	}
-
-
+	}		
+		
 	private void PlayerShooting()
 	{
 		if (Input.GetKeyDown (KeyCode.Space))
 		{
-			bullet = Instantiate(Bullet, transform.position, transform.rotation) as GameObject;
+			Instantiate(bullet, transform.position, transform.rotation);				
 		}
-
-		if (bullet != null) {
-			bullet.transform.position += Bullet.transform.up * 10 * Time.deltaTime;	
-		}
-
-		if (Input.GetKeyDown (KeyCode.E)) 
+		else if (Input.GetKeyDown (KeyCode.E)) 
 		{
-			var bomb = Instantiate(megaBomb, transform.position, transform.rotation) as GameObject;
+			Instantiate(megaBomb, transform.position, transform.rotation);
 		}
 	}
 
 	private bool CalculateFuelConsumption()
 	{
 		MovedDistance += Vector3.Distance (transform.position, lastPosition);
-		lastPosition = transform.position;
 		if (RemainingFuel > 0) {
 			RemainingFuel -= FuelConsumtion * Vector3.Distance (transform.position, lastPosition);
 			RemainInProcent = Mathf.Max((100 / FullTankSize) * RemainingFuel, 0);
@@ -135,6 +113,7 @@ public class PlayerController : MonoBehaviour
 		{
 			rb2d.gravityScale -= 0.1f * Time.deltaTime;
 		}
+		lastPosition = transform.position;
 	}
 
 	void OnCollisionEnter2D(Collision2D other)

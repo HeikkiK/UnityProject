@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class GunController : MonoBehaviour 
 {
+	public int BulletShootingDistance = 10;
+	public string Shooter = string.Empty;
+	private Vector3 bulletStartPosition = new Vector3 ();
 	List<string> bombExplosion = null;
 	List<string> bulletExplosion = null;
 
@@ -16,8 +19,10 @@ public class GunController : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		bombExplosion = new List<string>() { "Enemy_1(Clone)", "Ground_collider", "Airport", "Enemy_Airport", "Player" };
-		bulletExplosion = new List<string>() { "Enemy_1(Clone)" };
+		bulletStartPosition = transform.position;
+		var target = Shooter == "Enemy_1(Clone)" ? "Player(Clone)" : "Enemy_1(Clone)";
+		bombExplosion = new List<string>() { target, "Ground_collider", "Airport", "Enemy_Airport" };
+		bulletExplosion = new List<string>() { target };
 
 		bombDestroyItself = new List<string> (bombExplosion);
 		bulletDestroyItself = new List<string> (bombExplosion);
@@ -29,8 +34,13 @@ public class GunController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if (this.name == "Bullet(Clone)") {
+		if (this.name == "Bullet(Clone)") 
+		{
 			transform.position += transform.up * 10 * Time.deltaTime;
+			var currentShootingDistance = Vector3.Distance (bulletStartPosition, transform.position);
+			if (currentShootingDistance >= BulletShootingDistance) {
+				Destroy (gameObject);
+			}
 		}
 	}
 

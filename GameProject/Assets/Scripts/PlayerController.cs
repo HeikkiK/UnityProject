@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
 	{
 		megaBomb = Resources.Load ("Prefabs/MegaBomb", typeof(GameObject)) as GameObject;
 		bullet = Resources.Load ("Prefabs/Bullet", typeof(GameObject)) as GameObject;
+		bullet.GetComponent<GunController> ().Shooter = this.name;
 		FuelConsumtion = 15f;
 		lastPosition = transform.position;
 		rb2d = GetComponent<Rigidbody2D> ();

@@ -6,6 +6,9 @@ public class EnemyAi : MonoBehaviour {
 	public float RotationSpeed = 5;
 	public float DistanceToPlayer = 0;
 
+	private float fireDelta = 0.2F;
+	private float nextFire = 0.5F;
+	private float myTime = 0.0F;
 	private GameObject player;
 	private float currentSpeed = 3;
 	private Rigidbody2D rb2d;
@@ -16,7 +19,6 @@ public class EnemyAi : MonoBehaviour {
 	{
 		rb2d = GetComponent<Rigidbody2D> ();
 		bullet = Resources.Load ("Prefabs/Bullet", typeof(GameObject)) as GameObject;
-		bullet.GetComponent<GunController> ().Shooter = this.name;
 	}
 
 	void OnBecameInvisible() 
@@ -44,7 +46,14 @@ public class EnemyAi : MonoBehaviour {
 		DistanceToPlayer = Vector3.Distance (player.transform.position, transform.position);
 		if (DistanceToPlayer < 10)
 		{
-			Instantiate(bullet, transform.position, transform.rotation);				
+			myTime = myTime + Time.deltaTime;
+			if (myTime > nextFire) {
+				nextFire = myTime + fireDelta;
+				var shooted = Instantiate (bullet, transform.position, transform.rotation);
+				(shooted as GameObject).GetComponent<GunController> ().Shooter = this.name;
+				nextFire = nextFire - myTime;
+				myTime = 0.0F;
+			}
 		}
 	}
 

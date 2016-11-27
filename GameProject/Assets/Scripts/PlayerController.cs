@@ -13,13 +13,15 @@ public class PlayerController : MonoBehaviour
 	public float FuelConsumtion = 0;
 	public float RemainInProcent = 0;
 
+	private float fireDelta = 0.2F;
+	private float nextFire = 0.5F;
+	private float myTime = 0.0F;
 	private Rigidbody2D rb2d;
 	private float acceleration = 0.1f;
 	private int maxSpeed = 6;
 	private Vector3 lastPosition;
 	private GameObject enemy_1;
 	private bool isOutOfFuel = false;
-	//public float fireRate = 0;
 	private GameObject explosion;
 	private GameObject bullet, megaBomb;
 
@@ -27,7 +29,6 @@ public class PlayerController : MonoBehaviour
 	{
 		megaBomb = Resources.Load ("Prefabs/MegaBomb", typeof(GameObject)) as GameObject;
 		bullet = Resources.Load ("Prefabs/Bullet", typeof(GameObject)) as GameObject;
-		bullet.GetComponent<GunController> ().Shooter = this.name;
 		FuelConsumtion = 15f;
 		lastPosition = transform.position;
 		rb2d = GetComponent<Rigidbody2D> ();
@@ -44,14 +45,20 @@ public class PlayerController : MonoBehaviour
 		isOutOfFuel = CalculateFuelConsumption ();
 		PlayerMovement ();
 	}		
-		
+
 	private void PlayerShooting()
 	{
-		if (Input.GetKeyDown (KeyCode.Space))
+		myTime = myTime + Time.deltaTime;
+		if (Input.GetKey (KeyCode.Space) && myTime > nextFire)
 		{
-			Instantiate(bullet, transform.position, transform.rotation);				
+			nextFire = myTime + fireDelta;
+			var shooted = Instantiate(bullet, transform.position, transform.rotation);	
+			(shooted as GameObject).GetComponent<GunController> ().Shooter = this.name;
+			nextFire = nextFire - myTime;
+			myTime = 0.0F;
 		}
-		else if (Input.GetKeyDown (KeyCode.E)) 
+
+		if (Input.GetKeyDown (KeyCode.E)) 
 		{
 			Instantiate(megaBomb, transform.position, transform.rotation);
 		}

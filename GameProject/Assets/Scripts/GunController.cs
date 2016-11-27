@@ -64,17 +64,20 @@ public class GunController : MonoBehaviour
 			allowDestoyOther = bombDestroyOther.Contains(other.gameObject.name);
 		}
 
+		//Tekee räjähdyksen
 		if (allowExplosion) 
 		{
 			var explosion = Resources.Load ("Prefabs/Explosion_2", typeof(GameObject)) as GameObject;
 			Instantiate (explosion, transform.position, transform.rotation);
 		}
 			
+		//Tuhoaa luodin
 		if (allowDestroyItself) 
 		{
 			Destroy (gameObject);
 		}
 
+		//Tuhoaa vihollisen
 		if (allowDestoyOther) 
 		{
 			Destroy (other.gameObject);
